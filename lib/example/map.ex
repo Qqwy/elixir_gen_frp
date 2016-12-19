@@ -13,6 +13,3 @@ defmodule GenFRP.Example.Map do
   end
 end
 
-# {:ok, pid} = GenFRP.start_link(GenFRP.Example.Map)
-# GenFRP.send_event(pid, foo: "bar")
-# GenFRP.render(pid)
