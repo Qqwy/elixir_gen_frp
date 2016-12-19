@@ -52,14 +52,14 @@ defmodule GenFRP do
   # INTERNAL
 
   def handle_call({:register_callback, callback = %Callback{}}, _from, gen_server_state = %__MODULE__{}) do
+    callback = %Callback{callback | starting_state: callback.start_fun.(self())}
     new_gen_server_state = %{gen_server_state | callbacks: MapSet.put(gen_server_state.callbacks, callback)}
-    callback.start_fun.()
     {:reply, :ok, new_gen_server_state}
   end
 
   def handle_call({:deregister_callback, callback}, _from, gen_server_state = %__MODULE__{}) do
     new_gen_server_state = Map.put(gen_server_state, :callbacks, MapSet.delete(gen_server_state.callbacks, callback))
-    callback.stop_fun.()
+    callback.stop_fun.(self(), callback.starting_state)
     {:reply, :ok, new_gen_server_state}
   end
 
@@ -76,8 +76,8 @@ defmodule GenFRP do
   end
 
   def handle_cast({:send_event, event}, gen_server_state = %{module: module, state: state, callbacks: _callbacks}) do
-    IO.puts "Received event: #{inspect(event)}, #{inspect(gen_server_state)}"
-    IO.puts "Calling update"
+    # IO.puts "Received event: #{inspect(event)}, #{inspect(gen_server_state)}"
+    # IO.puts "Calling update"
     state = module.update(state, event)
     new_gen_server_state = %__MODULE__{gen_server_state | state: state}
     {:noreply, new_gen_server_state}

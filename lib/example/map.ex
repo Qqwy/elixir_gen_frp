@@ -12,4 +12,3 @@ defmodule GenFRP.Example.Map do
     rendered_state
   end
 end
-
