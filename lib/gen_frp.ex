@@ -20,7 +20,7 @@ defmodule GenFRP do
   end
 
   def start(frp_module, initial_state) do
-    GenServer.start(__MODULE__, %__MODULE__{module: frp_module, state: initial_state, callbacks: MapSet.new})
+    GenServer.start(__MODULE__, %__MODULE__{module: frp_module, state: initial_state, callbacks: %{}})
   end
 
 
@@ -29,7 +29,7 @@ defmodule GenFRP do
   end
 
   def start_link(frp_module, initial_state) do
-    GenServer.start_link(__MODULE__, %__MODULE__{module: frp_module, state: initial_state, callbacks: MapSet.new})
+    GenServer.start_link(__MODULE__, %__MODULE__{module: frp_module, state: initial_state, callbacks: %{}})
   end
 
 
@@ -49,17 +49,23 @@ defmodule GenFRP do
     GenServer.call(pid, :render)
   end
 
+  def debug(pid) do
+    GenServer.call(pid, :debug)
+  end
+
   # INTERNAL
 
   def handle_call({:register_callback, callback = %Callback{}}, _from, gen_server_state = %__MODULE__{}) do
-    callback = %Callback{callback | starting_state: callback.start_fun.(self())}
-    new_gen_server_state = %{gen_server_state | callbacks: MapSet.put(gen_server_state.callbacks, callback)}
+    callback_starting_state = callback.start_fun.(self())
+    IO.inspect(callback_starting_state)
+    new_gen_server_state = %{gen_server_state | callbacks: Map.put(gen_server_state.callbacks, callback, callback_starting_state)}
     {:reply, :ok, new_gen_server_state}
   end
 
   def handle_call({:deregister_callback, callback}, _from, gen_server_state = %__MODULE__{}) do
-    new_gen_server_state = Map.put(gen_server_state, :callbacks, MapSet.delete(gen_server_state.callbacks, callback))
-    callback.stop_fun.(self(), callback.starting_state)
+    callback.stop_fun.(self(), gen_server_state.callbacks[callback])
+    new_gen_server_state = Map.put(gen_server_state, :callbacks, Map.delete(gen_server_state.callbacks, callback))
+    IO.inspect(new_gen_server_state)
     {:reply, :ok, new_gen_server_state}
   end
 
@@ -75,7 +81,11 @@ defmodule GenFRP do
     {:reply, render, new_gen_server_state}
   end
 
-  def handle_cast({:send_event, event}, gen_server_state = %{module: module, state: state, callbacks: _callbacks}) do
+  def handle_call(:debug, _from, gen_server_state) do
+    {:reply, gen_server_state, gen_server_state}
+  end
+
+  def handle_cast({:send_event, event}, gen_server_state = %__MODULE__{module: module, state: state}) do
     # IO.puts "Received event: #{inspect(event)}, #{inspect(gen_server_state)}"
     # IO.puts "Calling update"
     state = module.update(state, event)

@@ -37,7 +37,8 @@ defmodule GenFRP.Mixfile do
   # Type "mix help deps" for more examples and options
   defp deps do
     [
-      {:block_timer, "~> 0.0.1"}
+      # {:block_timer, "~> 0.0.1"}
+      {:petick, "~> 0.0.1"}
     ]
   end
 end
