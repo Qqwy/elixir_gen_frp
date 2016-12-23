@@ -25,10 +25,18 @@ defmodule GenFRP.Behaviour do
 
       @doc """
       Takes the current state and returns something useful.
-      """
-      def render(state), do: state
+      The second argument passed to `render` is the state
+      that was the output of the last time `render` was called.
 
-      defoverridable update: 2, render: 1
+      This is done so implementations of `render` can, if they want,
+      use sophisticated algorithms that work on the _patch_ or _diff_
+      of changes between the two states,
+
+      instead of re-creating a whole new output each time.
+      """
+      def render(state, last_rendered_state), do: state
+
+      defoverridable update: 2, render: 2
     end
   end
 end

@@ -74,9 +74,9 @@ defmodule GenFRP do
     {:reply, gen_server_state.last_render, gen_server_state}
   end
 
-  def handle_call(:render, _from, gen_server_state = %__MODULE__{module: module, state: state}) do
+  def handle_call(:render, _from, gen_server_state = %__MODULE__{module: module, state: state, last_rendered_state: last_rendered_state}) do
     IO.puts "Rerendering..."
-    render = module.render(state)
+    render = module.render(state, last_rendered_state)
     new_gen_server_state = %__MODULE__{gen_server_state | last_render: render, last_rendered_state: state}
     {:reply, render, new_gen_server_state}
   end

@@ -6,9 +6,15 @@ defmodule GenFRP.Example.Map do
     Map.put(state, key, val)
   end
 
-  def render(state) do
+  def update(state, event) do
+    IO.puts "Unrecognized event passed to `#{inspect(__MODULE__)}.update/2`: #{event}"
+  end
+
+  def render(state, last_rendered_state) do
     rendered_state = "The current map: #{inspect(state)}"
     IO.puts(rendered_state)
-    rendered_state
+    IO.puts("The diff since last time:#{inspect MapDiff.diff(last_rendered_state, state)}")
+    # rendered_state
+    state
   end
 end

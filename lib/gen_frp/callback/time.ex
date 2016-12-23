@@ -1,8 +1,4 @@
-defmodule GenFRP.Callback do
-  # require BlockTimer
-
-  defstruct start_fun: &GenFRP.Helper.void/1, stop_fun: &GenFRP.Helper.void/2
-
+defmodule GenFRP.Callback.Time do
   @doc """
   Sends the specified `event` every `milliseconds`
   to the GenFRP process.
@@ -30,7 +26,7 @@ defmodule GenFRP.Callback do
         Petick.terminate(timer_ref)
       end
 
-    %__MODULE__{start_fun: start_fun, stop_fun: stop_fun}
+    %GenFRP.Callback{start_fun: start_fun, stop_fun: stop_fun}
   end
 
   def every_interval(milliseconds, event) do
@@ -45,4 +41,5 @@ defmodule GenFRP.Callback do
   def tick(milliseconds \\ 1000) do
     every_interval(milliseconds, fn -> DateTime.utc_now() end)
   end
+
 end
