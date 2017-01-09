@@ -1,5 +1,20 @@
 defmodule GenFRP.Callback do
-  # require BlockTimer
+  @moduledoc """
+  A GenFRP.Callback is a struct that contains a starting function `start_fun`
+  and a stopping function `stop_fun`.
+
+  `start_fun` should handle setting up some periodical event
+  or other way of trigger; `stop_fun` should handle removing this
+  trigger later.
+
+  - `start_fun` is executed when the callback is registered to the FRP process,
+  with a single argument: the PID of the FRP process.
+  - `stop_fun` is executed when the callback gets deregistered later.
+  It is called with two arguments:
+    1) the PID of the FRP process,
+    2) the value that `start_fun` returned earlier.
+
+  """
 
   defstruct start_fun: &GenFRP.Helper.void/1, stop_fun: &GenFRP.Helper.void/2
 
