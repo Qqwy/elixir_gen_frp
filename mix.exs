@@ -11,7 +11,9 @@ defmodule GenFRP.Mixfile do
      elixir: "~> 1.3",
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
-     deps: deps()]
+     deps: deps(),
+     description: description(),
+     package: package()]
   end
 
   # Configuration for the OTP application
@@ -38,6 +40,11 @@ defmodule GenFRP.Mixfile do
   defp deps do
     [
       {:petick, "~> 0.0.1"},
+
+
+      {:earmark, ">= 0.0.0", only: [:dev]},    # Markdown, dependency of ex_doc
+      {:ex_doc, "~> 0.11",   only: [:dev]},    # Documentation for Hex.pm
+      {:inch_ex, ">= 0.0.0", only: :docs},     # Inch CI documentation quality test.
       {:map_diff, "~> 1.0", only: [:dev, :test]},
     ]
   end
@@ -51,11 +58,12 @@ defmodule GenFRP.Mixfile do
 
   defp package do
     [# These are the default files included in the package
-      name: :postgrex,
-      files: ["lib", "priv", "mix.exs", "README*", "readme*", "LICENSE*", "license*"],
-      maintainers: ["Eric Meadows-Jönsson", "José Valim"],
-      licenses: ["Apache 2.0"],
-      links: %{"GitHub" => "https://github.com/ericmj/postgrex",
-               "Docs" => "http://ericmj.github.io/postgrex/"}]
+      name: :gen_frp,
+      files: ["lib", "mix.exs", "README*", "LICENSE"],
+      maintainers: ["Wiebe-Marten Wijnja/Qqwy"],
+      licenses: ["MIT"],
+      links: %{"GitHub" => "https://github.com/Qqwy/elixir_gen_frp/"}
+    ]
+
   end
 end

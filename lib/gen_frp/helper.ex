@@ -1,3 +1,3 @@
 defmodule GenFRP.Helper do
-  def void(foo \\ {}, bar \\ {}), do: nil
+  def void(_ \\ {}, _ \\ {}), do: nil
 end
