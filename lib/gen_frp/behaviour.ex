@@ -5,10 +5,11 @@ defmodule GenFRP.Behaviour do
   @type view :: any
 
   @callback update(state, event) :: state
-  @callback render(state) :: view
+  @callback render(state, last_rendered_state) :: view
 
   defmacro __using__(opts) do
     quote location: :keep do
+      @behaviour GenFRP.Behaviour
 
 
       @doc """
