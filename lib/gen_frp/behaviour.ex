@@ -2,10 +2,9 @@ defmodule GenFRP.Behaviour do
 
   @type state :: any
   @type event :: any
-  @type view :: any
 
   @callback update(state, event) :: state
-  @callback render(state, last_rendered_state) :: view
+  @callback render(state, last_rendered_state :: state) :: any
 
   defmacro __using__(opts) do
     quote location: :keep do

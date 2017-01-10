@@ -1,0 +1,4 @@
+%{"map_diff": {:hex, :map_diff, "1.3.0", "fad8ba4cb290c393fcfebdd9eda38709ba05049eec568d40a4fbb8c092a3a5a8", [:mix], [{:tensor, "~> 1.0", [hex: :tensor, optional: false]}]},
+  "numbers": {:hex, :numbers, "1.0.0", "f1e224920ac347953faff00ecac1ee3f4b9e5103018eb3fc5d1999d53ae6418c", [:mix], []},
+  "petick": {:hex, :petick, "0.0.1", "f29856643ba55f3fdb8b79ba672b85b9256780a9f4a85e545d9221efbe8f423b", [:mix], []},
+  "tensor": {:hex, :tensor, "1.0.1", "c1dad6e7f8ba710e0c0791ccab7071063ec589b65e252bb76444c1a7d5f6d9cb", [:mix], [{:numbers, "~> 1.0", [hex: :numbers, optional: false]}]}}

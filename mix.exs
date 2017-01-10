@@ -4,11 +4,11 @@ defmodule GenFRP.Mixfile do
   def project do
     [app: :gen_frp,
      version: "0.1.0",
-     build_path: "../../_build",
-     config_path: "../../config/config.exs",
-     deps_path: "../../deps",
-     lockfile: "../../mix.lock",
-     elixir: "~> 1.4-rc",
+     # build_path: "../../_build",
+     # config_path: "../../config/config.exs",
+     # deps_path: "../../deps",
+     # lockfile: "../../mix.lock",
+     elixir: "~> 1.3",
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
      deps: deps()]
@@ -37,8 +37,25 @@ defmodule GenFRP.Mixfile do
   # Type "mix help deps" for more examples and options
   defp deps do
     [
-      # {:block_timer, "~> 0.0.1"}
-      {:petick, "~> 0.0.1"}
+      {:petick, "~> 0.0.1"},
+      {:map_diff, "~> 1.0", only: [:dev, :test]},
     ]
+  end
+
+
+  defp description do
+    """
+    A library that allows for doing Functional Reactive Programming in Elixir
+    """
+  end
+
+  defp package do
+    [# These are the default files included in the package
+      name: :postgrex,
+      files: ["lib", "priv", "mix.exs", "README*", "readme*", "LICENSE*", "license*"],
+      maintainers: ["Eric Meadows-Jönsson", "José Valim"],
+      licenses: ["Apache 2.0"],
+      links: %{"GitHub" => "https://github.com/ericmj/postgrex",
+               "Docs" => "http://ericmj.github.io/postgrex/"}]
   end
 end
