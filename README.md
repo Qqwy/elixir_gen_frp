@@ -58,7 +58,7 @@ GenFRP.send_event(pid, {:baz, 42})
 # ... maybe yet some other code here...
 GenFRP.render(pid)
 "`foo`: `bar`
-``baz`: `42`
+`baz`: `42`
 "
 ```
 
