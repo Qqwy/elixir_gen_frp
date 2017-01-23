@@ -38,7 +38,7 @@ defmodule GenFRP.Behaviour do
       """
       def render(state, last_rendered_state), do: state
 
-      defoverridable update: 2, render: 2
+      defoverridable init: 0, update: 2, render: 2
     end
   end
 end

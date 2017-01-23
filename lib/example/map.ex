@@ -1,5 +1,7 @@
 defmodule GenFRP.Example.Map do
-  use GenFRP, initial_state: %{}
+  use GenFRP
+
+  def init, do: %{}
 
 
   def update(state, [{key, val}]) do

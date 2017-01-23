@@ -40,9 +40,12 @@ defmodule GenFRP do
 
   It returns the PID of the started process, which is to be used
   for most of the other methods in this module.
+
+  `start/1` uses the initial state from calling `init/0` on `frp_module`.
+  `start/2` uses the specified `initial_state` instead.
   """
   def start(frp_module) do
-    start(frp_module, frp_module.initial_state())
+    start(frp_module, frp_module.init())
   end
 
   def start(frp_module, initial_state) do
@@ -52,9 +55,14 @@ defmodule GenFRP do
   @doc """
   Atomically starts the given `frp_module` as a GenFRP process
   and sets up a link to it; if it crashes, the process that started it will also crash.
+
+
+  `start_link/1` uses the initial state from calling `init/0` on `frp_module`.
+  `start_link/2` uses the specified `initial_state` instead.
+
   """
   def start_link(frp_module) do
-    start(frp_module, frp_module.initial_state())
+    start(frp_module, frp_module.init())
   end
 
   def start_link(frp_module, initial_state) do

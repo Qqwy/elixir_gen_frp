@@ -22,8 +22,9 @@ Here is a very simple example (which can be found as `GenFRP.Example.Map` as wel
 
 ```elixir
 defmodule GenFRP.Example.Map do
-  use GenFRP, initial_state: %{}
+  use GenFRP
 
+  def init, do: %{}
 
   def update(state, [{key, val}]) do
     Map.put(state, key, val)
