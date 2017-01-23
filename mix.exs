@@ -3,7 +3,7 @@ defmodule GenFRP.Mixfile do
 
   def project do
     [app: :gen_frp,
-     version: "0.1.0",
+     version: "0.5.0",
      # build_path: "../../_build",
      # config_path: "../../config/config.exs",
      # deps_path: "../../deps",
@@ -39,7 +39,7 @@ defmodule GenFRP.Mixfile do
   # Type "mix help deps" for more examples and options
   defp deps do
     [
-      {:petick, "~> 0.0.1"},
+      {:petick, "~> 0.0.1"}, # Used for GenFRP.Callback.Time
 
 
       {:earmark, ">= 0.0.0", only: [:dev]},    # Markdown, dependency of ex_doc

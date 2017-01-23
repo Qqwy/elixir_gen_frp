@@ -8,6 +8,7 @@ defmodule GenFRP.Example.Map do
 
   def update(state, event) do
     IO.puts "Unrecognized event passed to `#{inspect(__MODULE__)}.update/2`: #{event}"
+    state
   end
 
   def render(state, last_rendered_state) do

@@ -23,7 +23,6 @@ defmodule GenFRP do
 
   alias GenFRP.Callback
 
-
   defstruct [:module, :state, callbacks: MapSet.new, last_rendered_state: nil, last_render: nil]
 
   defmacro __using__(opts) do
@@ -31,7 +30,6 @@ defmodule GenFRP do
       use GenFRP.Behaviour, unquote(opts)
     end
   end
-
 
   use GenServer
 
@@ -107,7 +105,11 @@ defmodule GenFRP do
 
   @doc """
   A simple function that just dumps the full internal state of the GenFRP process.
-  Should only be used for debugging purposes; might be removed in future releases.
+  Should only be used for debugging/testing purposes of the GenFRP process itself;
+  might be removed in future releases.
+
+  (Debugging your GenFRP behaviour can be done by checking the outcome of calling
+  the `update/2` function directly)
   """
   def debug(pid) do
     GenServer.call(pid, :debug)

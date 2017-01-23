@@ -68,7 +68,7 @@ by adding `gen_frp` to your list of dependencies in `mix.exs`:
 
 ```elixir
 def deps do
-  [{:gen_frp, "~> 0.1.0"}]
+  [{:gen_frp, "~> 0.5.0"}]
 end
 ```
 
@@ -76,3 +76,7 @@ Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_do
 and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
 be found at [https://hexdocs.pm/gen_frp](https://hexdocs.pm/gen_frp).
 
+## Changelog
+
+- 0.5.0 Changed the way the initial state works to `init/0`, to follow the naming convention that GenServer et al. already use. Also, documentation was improved.
+- 0.1.0 Initial released version.
